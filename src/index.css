@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.wrapper {
+    padding-top: 0;
+    margin: 0 auto;
+    background: #ccc;
+}
+
+.enter_form {
+    height: 541px;
+    width: 580px;
+    border: 1px solid #000;
+    border-radius: 5%;
+    background: #fff;
+    /* margin: auto; */
+}
+.registration_form {
+    height: 541px;
+    width: 580px;
+    border: 1px solid #000;
+    border-radius: 5%;
+    background: #fff;
+    /* margin: auto; */
+}
