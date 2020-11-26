@@ -1,11 +1,11 @@
 import React from 'react'
-import PageRegistration from './PageRegistration'
-import {render} from '@testing-library/react'
+import RegistrationPage from './RegistrationPage'
+import { render } from '@testing-library/react'
 
-describe ("PageRegistration", () => {
+describe ("RegistrationPage", () => {
     it("render correctly", () => {
-        const {container} = render(<PageRegistration />)
-        expect(container.innerHTML).toMatch("PageRegistration")
+        const {container} = render(<RegistrationPage />)
+        expect(container.innerHTML).toMatch("Войти")
 
         // const { getByLabelText } = render(<PageRegistration />)
 
