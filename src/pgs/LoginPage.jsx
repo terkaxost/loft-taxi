@@ -1,112 +1,65 @@
 import React from 'react';
-import '.././index.css';
+import { FormStyles } from './FormStyles'
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
 
-const styles = {
-    h1: {
-       margin: '10px',
-        alignItems: 'center',
+import FormControl from '@material-ui/core/FormControl';
+import clsx from 'clsx';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        // margin: theme.spacing(1),
+        // margin: "10px"
+      }
     },
-    form: {
-        margin: '10px',
-        padding: 0,
-        listStyle: 'none',
-    },
-    label: {
-        // margin: '50px 0px',
-        // padding: '50px 0px'
-    },
-    input: {       
-        margin: '10px 0px',
-        // padding: '50px 0px',
-        border: 'none',
-        borderBottom: '1px solid #000',
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
-    button: {
-        margin: '40px 0px',
-        padding: '10px 150px'
-    },
-    p: {
-        margin: 0
-    }
-}
+    ...FormStyles
+  }));
 
 function LoginPage(props) {
     let user = {
         name: '',
-        pass: ''
+        password: ''
     }
-    const formHandleSubmit = event => {
-        event.preventDefault()
+    const classes = useStyles();
+
+    const loginClick = (event) => {
+        event.target.placeholder = "mail@mail.ru"
     }
-    const inputEnter = () => { 
-        
+    const loginChange = (event) => {
+        user.name = event.target.value
     }
-    const inputLeave = () => { 
-        
+    const passwordClick = (event) => {
+        event.target.placeholder = "******"
     }
-    const inputFocus = (event) => { 
-        event.preventDefault();
+    const passwordChange = (event) => {
+        user.password = event.target.value
     }
-    const inputBlur = () => { 
-        
-    }
-    const inputClick = () => {
-        
-    }
-    const inputValue = (text) => {
+    const buttonClick = (event) => {
+        props.pageChange('OrderPage')
+        // check data and send user
     }
     const linkClick = (event) => {
-        event.preventDefault()
         props.pageChange('RegistrationPage')
     }
 
-    const buttonClick = (event) => {
-        event.preventDefault()
-        props.pageChange('OrderPage')
-    }
-
     return (          
-        <div className="enter_form">
-            <h1 style={styles.h1}>Авторизация</h1>
-            <form style={styles.form} onSubmit={ formHandleSubmit }>
-                <label style={styles.label} htmlFor="login">Имя пользователя *</label>
-                <input 
-                    style={styles.input}
-                    id="login"
-                    type="text"
-                    name="login"
-                    placeholder="Имя пользователя *"
-                    onChange={ (event) => {
-                        user.name = event.target.value
-                        inputValue(event.target.value)
-                    } }
-                    onMouseEnter={ inputEnter }
-                    onMouseLeave={ inputLeave}
-                    onFocus={ inputFocus }
-                    onBlur={ inputBlur }
-                    onClick={ inputClick } 
-                />
-                <label style={styles.label} htmlFor="password">Пароль *</label>
-                <input 
-                    style={styles.input}
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="Пароль *"
-                    onChange={ (event) => user.pass = event.target.value }
-                    onMouseEnter={ inputEnter }
-                    onMouseLeave={ inputLeave}
-                    onFocus={ inputFocus }
-                    onBlur={ inputBlur }
-                />
-                <button 
-                    style={styles.button}
-                    onClick={ (event) => buttonClick(event) }
-                >Войти</button>
-                <p style={styles.p}>Новый пользователь? <a href="/" onClick={ linkClick }>Зарегистрируйтесь</a></p>
+        <div className="form">
+            <Typography className={classes.header} variant="h5" gutterBottom ><b>Войти</b></Typography>
+            <form className={classes.root} noValidate autoComplete="off">                                
+                <TextField className={classes.input} id="standard-basic" label="Имя пользователя *" onClick={ loginClick } onChange={ loginChange } />
+                <FormControl className={clsx(classes.margin, classes.textField, classes.input)}>
+                    <InputLabel htmlFor="standard-adornment-password">Пароль *</InputLabel>
+                    <Input id="standard-adornment-password" type='password' onClick={ passwordClick } onChange={ passwordChange } />
+                </FormControl>
+                <Button className={classes.button} variant="contained" onClick={ buttonClick } >Войти</Button>
             </form>
+            <Typography className={classes.link}>Новый пользователь?  <Link href="#" onClick={ linkClick } >Зарегистрируйтесь</Link></Typography>
         </div>
     )
 }

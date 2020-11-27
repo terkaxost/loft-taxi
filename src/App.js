@@ -3,8 +3,8 @@ import './index.css';
 
 import LoginPage from './pgs/LoginPage'
 import RegistrationPage from './pgs/RegistrationPage'
-import { ProfilePage } from './pgs/ProfilePage'
-import { OrderPage } from './pgs/OrderPage'
+import ProfilePage from './pgs/ProfilePage'
+import OrderPage from './pgs/OrderPage'
 
 class App extends React.Component {    
     state = {

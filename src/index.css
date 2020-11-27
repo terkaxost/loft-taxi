@@ -19,18 +19,17 @@ code {
 }
 
 .enter_form {
-    height: 541px;
-    width: 580px;
+    width: 450px;
     border: 1px solid #000;
     border-radius: 5%;
     background: #fff;
-    /* margin: auto; */
+    text-align: center;
 }
-.registration_form {
-    height: 541px;
-    width: 580px;
+.form {
+    width: 450px;
     border: 1px solid #000;
     border-radius: 5%;
     background: #fff;
+    text-align: center;
     /* margin: auto; */
 }
