@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormStyles } from './FormStyles'
+//Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -42,14 +42,13 @@ function LoginPage(props) {
     }
     const buttonClick = (event) => {
         props.pageChange('OrderPage')
-        // check data and send user
     }
     const linkClick = (event) => {
         props.pageChange('RegistrationPage')
     }
 
     return (          
-        <div className="form">
+        <div className="wrapper form">
             <Typography className={classes.header} variant="h5" gutterBottom ><b>Войти</b></Typography>
             <form className={classes.root} noValidate autoComplete="off">                                
                 <TextField className={classes.input} id="standard-basic" label="Имя пользователя *" onClick={ loginClick } onChange={ loginChange } />

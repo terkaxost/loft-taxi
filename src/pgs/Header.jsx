@@ -1,24 +1,3 @@
-// import React from 'react'
-
-// export const Header = (props) => {
-//     return (
-//         <>
-//             <a href="/" onClick={ (event) => {
-//                 event.preventDefault() 
-//                 props.pageChange('OrderPage')} 
-//             }>Карта</a>
-//             <a href="/" onClick={ (event) => {
-//                 event.preventDefault() 
-//                 props.pageChange('ProfilePage')} 
-//             }>Профиль</a>
-//             <a href="/" onClick={ (event) => {
-//                 event.preventDefault() 
-//                 props.pageChange('LoginPage')} 
-//             }>Выйти</a>
-//         </>
-//     )
-// }
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';

@@ -8,25 +8,23 @@ import OrderPage from './pgs/OrderPage'
 
 class App extends React.Component {    
     state = {
-        currentPageName: 'LoginPage',
+        currentPageName: 'OrderPage',
     }
 
     onPageChange = (name) => {
         this.setState({currentPageName: name})
     }
-    renderPage() {
+
+    render() {
         const pageComponents = {
             LoginPage: <LoginPage pageChange={ this.onPageChange } />,
             RegistrationPage: <RegistrationPage pageChange={ this.onPageChange } />,
             ProfilePage: <ProfilePage pageChange={ this.onPageChange } />,
             OrderPage: <OrderPage pageChange={ this.onPageChange } />
         }
-        
-        return pageComponents[this.state.currentPageName]
-    }
-
-    render() {
-        return this.renderPage()
+        return (
+            pageComponents[this.state.currentPageName]
+        )
     } 
 }
 

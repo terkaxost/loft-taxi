@@ -22,7 +22,7 @@ class RegistrationPage extends React.Component {
     }
     render () {
         return (     
-            <div className="form">    
+            <div className="wrapper form">    
                 <form noValidate autoComplete="off">
                     <Typography className={this.props.classes.header} variant="h5" gutterBottom ><b>Регистрация</b></Typography>
                     <TextField className={this.props.classes.input} id="standard-basic" label="Адрес электронной почты *" />
