@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FormStyles } from './FormStyles';
 import Header from './Header';
-//Material-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -37,21 +36,18 @@ const myCards = [
         name: "Стандарт",
         cost: "150Р",
         img: "IMG",
-        selected: false,
         theme: 1
     },
     {
         name: "Бизнес",
         cost: "250Р",
         img: "IMG",
-        selected: false,
         theme: 1
     }
     ,{
         name: "Премиум",
         cost: "350Р",
         img: "IMG",
-        selected: false,
         theme: 1
     }
 ];
@@ -97,7 +93,6 @@ function OrderPage(props) {
         }
         setCards(cards);
     }
-    const timeWait = 11;
 
     return (
         <>
@@ -134,12 +129,12 @@ function OrderPage(props) {
                         <Card cardTheme={ cardChangeTheme } card={ cardObj } key={ Math.random() } />
                     ))}
                 </div>
-                <Button className={classes.button} variant="contained" >Сделать новый заказ</Button>
+                <Button className={classes.button} variant="contained" >Заказать</Button>
             </div>
 
             <div className="wrapper form">
                 <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
-                <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через {timeWait} мин</Typography>
+                <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
                 <Button className={classes.button} variant="contained" >Сделать новый заказ</Button>
             </div>
         </>

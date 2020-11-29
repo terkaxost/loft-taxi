@@ -5,7 +5,6 @@ export const FormStyles = {
     input: {
         margin: "10px",
         width: "330px",
-        // height: "50px"
     },
     inputHalf: {
         margin: "10px",

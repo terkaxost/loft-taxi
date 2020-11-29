@@ -7,13 +7,6 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 
 class RegistrationPage extends React.Component {
-    state = {
-        user: {
-            name: '',
-            pass: ''
-        }
-    }
-
     buttonClick(event) {
         this.props.pageChange('ProfilePage')
     }

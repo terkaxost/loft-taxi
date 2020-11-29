@@ -1,6 +1,5 @@
 import React from 'react';
 import './index.css';
-
 import LoginPage from './pgs/LoginPage'
 import RegistrationPage from './pgs/RegistrationPage'
 import ProfilePage from './pgs/ProfilePage'

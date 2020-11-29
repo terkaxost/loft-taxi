@@ -12,38 +12,26 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        // margin: theme.spacing(1),
-        // margin: "10px"
-      }
-    },
     ...FormStyles
   }));
 
 function LoginPage(props) {
-    let user = {
-        name: '',
-        password: ''
-    }
     const classes = useStyles();
 
     const loginClick = (event) => {
         event.target.placeholder = "mail@mail.ru"
     }
-    const loginChange = (event) => {
-        user.name = event.target.value
+    const loginChange = () => {
     }
     const passwordClick = (event) => {
         event.target.placeholder = "******"
     }
-    const passwordChange = (event) => {
-        user.password = event.target.value
+    const passwordChange = () => {
     }
-    const buttonClick = (event) => {
+    const buttonClick = () => {
         props.pageChange('OrderPage')
     }
-    const linkClick = (event) => {
+    const linkClick = () => {
         props.pageChange('RegistrationPage')
     }
 
