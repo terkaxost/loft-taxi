@@ -22,5 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#questions by project
+debug.log
+
+#questions and examples by project
 questions.txt
+/src/examples

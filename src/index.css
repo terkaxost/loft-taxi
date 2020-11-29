@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.wrapper {
+    border: 1px solid #000;
+    border-radius: 30px;
+    background: #fff;
+    text-align: center;
+}
+.profile {
+    width: 900px;
+    height: 430px;
+}
+.form {
+    width: 450px;
+    float: left;
+}
+.card {
+    width: 400px;
+    padding-top: 30px;
+    vertical-align: middle;
+    float: left;
+}
