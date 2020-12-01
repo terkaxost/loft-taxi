@@ -5,8 +5,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 class RegistrationPage extends React.Component {
+    static propTypes = {
+        pageChange: PropTypes.func.isRequired,
+        classes: PropTypes.shape({
+            header: PropTypes.string,
+            input: PropTypes.string,
+        }) 
+    }
     buttonClick(event) {
         this.props.pageChange('ProfilePage')
     }

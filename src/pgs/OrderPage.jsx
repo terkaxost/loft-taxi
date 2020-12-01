@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FormStyles } from './FormStyles';
 import Header from './Header';
+import { myCards } from './OrderCards.js'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     cards: {
@@ -30,27 +32,6 @@ const useStyles = makeStyles((theme) => ({
       },
     ...FormStyles
   }));
-
-const myCards = [
-    {
-        name: "Стандарт",
-        cost: "150Р",
-        img: "IMG",
-        theme: 1
-    },
-    {
-        name: "Бизнес",
-        cost: "250Р",
-        img: "IMG",
-        theme: 1
-    }
-    ,{
-        name: "Премиум",
-        cost: "350Р",
-        img: "IMG",
-        theme: 1
-    }
-];
 
 function Card(props) {
     return <Paper elevation={props.card.theme} 
@@ -139,6 +120,10 @@ function OrderPage(props) {
             </div>
         </>
     )
+}
+
+OrderPage.propTypes = {
+    pageChange: propTypes.func.isRequired
 }
 
 export default OrderPage
