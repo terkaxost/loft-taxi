@@ -25,13 +25,11 @@ export function App() {
         if (email !== 'q' || password !== 'q') {
             return false;
         }
-        console.log("logIn")
         setIsLoggedIn(true);
         
         return true;
     }
     const logOut = () => {
-        console.log("logOut")
         setIsLoggedIn(false);
     }
 
@@ -39,16 +37,6 @@ export function App() {
         <Context.Provider value={ {logIn, logOut, getIsLoggedIn} }>
             <Map />
             { pageComponents[getCurrentPageName] }
-            
-            {/* for App.test, del before push */}
-            <div style={{position: "absolute" }}>
-                <button onClick={ () => onPageChange("LoginPage") }>LoginPage</button>
-                <button onClick={ () => onPageChange("RegistrationPage") }>RegistrationPage</button>
-                <button onClick={ () => onPageChange("OrderPage") }>OrderPage</button>
-                <button onClick={ () => onPageChange("ProfilePage") }>ProfilePage</button>
-                <button onClick={ () => logIn("q", "q") }>LogIn</button>
-                <button onClick={ () => logOut() }>LogOut</button>
-            </div>
         </Context.Provider>
     )
 }
