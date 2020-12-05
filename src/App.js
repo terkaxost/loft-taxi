@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import './index.css';
-import LoginPage from './pgs/LoginPage';
+import { LoginPage } from './pgs/LoginPage';
 import RegistrationPage from './pgs/RegistrationPage';
-import ProfilePage from './pgs/ProfilePage';
-import OrderPage from './pgs/OrderPage';
+import { ProfilePage } from './pgs/ProfilePage';
+import { OrderPage } from './pgs/OrderPage';
 import { Map } from './pgs/Map';
 
-export const Context = React.createContext();
+export const Context = createContext();
 
-export function AppAuth() {
-    const [getCurrentPageName, setCurrentPageName] = React.useState("LoginPage");
-    let [getIsLoggedIn, setIsLoggedIn] = React.useState(false);
+export function App() {
+    const [getCurrentPageName, setCurrentPageName] = useState("LoginPage");
+    const [getIsLoggedIn, setIsLoggedIn] = useState(false);
     
     const onPageChange = (name) => {
         setCurrentPageName(name);
@@ -25,20 +25,29 @@ export function AppAuth() {
         if (email !== 'q' || password !== 'q') {
             return false;
         }
+        console.log("logIn")
         setIsLoggedIn(true);
+        
         return true;
     }
     const logOut = () => {
+        console.log("logOut")
         setIsLoggedIn(false);
     }
 
     return (
         <Context.Provider value={ {logIn, logOut, getIsLoggedIn} }>
-            <div style={ {zIndex: 1, position: "absolute"} }>
-                <Map />
-            </div>
-            <div style={ {zIndex: 2, position: "absolute"} }>
-                { pageComponents[getCurrentPageName] }
+            <Map />
+            { pageComponents[getCurrentPageName] }
+            
+            {/* for App.test, del before push */}
+            <div style={{position: "absolute" }}>
+                <button onClick={ () => onPageChange("LoginPage") }>LoginPage</button>
+                <button onClick={ () => onPageChange("RegistrationPage") }>RegistrationPage</button>
+                <button onClick={ () => onPageChange("OrderPage") }>OrderPage</button>
+                <button onClick={ () => onPageChange("ProfilePage") }>ProfilePage</button>
+                <button onClick={ () => logIn("q", "q") }>LogIn</button>
+                <button onClick={ () => logOut() }>LogOut</button>
             </div>
         </Context.Provider>
     )

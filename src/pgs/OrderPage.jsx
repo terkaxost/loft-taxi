@@ -44,17 +44,16 @@ function Card(props) {
                 <Typography variant="caption" display="block" >Стоимость</Typography>
                 <Typography variant="h6" display="block" gutterBottom >{props.card.cost}</Typography>
             </div>
-            <Typography >{props.card.img}</Typography>
-            
+            <Typography >{props.card.img}</Typography>            
         </Paper>
 }
 
-function OrderPage(props) {
+export function OrderPage(props) {
     const classes = useStyles();
     
     const [getCards, setCards] = useState( myCards );  
-    const [from, setFrom] = React.useState('');  
-    const [where, setWhere] = React.useState(''); 
+    const [from, setFrom] = useState('');  
+    const [where, setWhere] = useState(''); 
 
     const fromChange = (event) => {
         setFrom(event.target.value);
@@ -112,18 +111,22 @@ function OrderPage(props) {
                 </div>
                 <Button className={classes.button} variant="contained" >Заказать</Button>
             </div>
-
-            <div className="wrapper form">
-                <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
-                <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
-                <Button className={classes.button} variant="contained" >Сделать новый заказ</Button>
-            </div>
         </>
+    )
+}
+
+export function OrderConfirm(props) {
+    const classes = useStyles();
+
+    return (
+        <div className="wrapper form">
+            <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
+            <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
+            <Button className={classes.button} variant="contained" >Сделать новый заказ</Button>
+        </div>
     )
 }
 
 OrderPage.propTypes = {
     pageChange: propTypes.func.isRequired
 }
-
-export default OrderPage

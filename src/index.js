@@ -8,7 +8,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 
 ReactDOM.render(
   <MuiThemeProvider theme={ theme }>
-    <AppAuth />
+    <App />
   </MuiThemeProvider>,
   document.getElementById('root')
 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormStyles } from './FormStyles'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -16,30 +16,34 @@ const useStyles = makeStyles((theme) => ({
     ...FormStyles
   }));
 
-function LoginPage(props) {
-    const [getError, setError] = React.useState('');
+function LoginError(props) {
+    return <div>{ props.errorText }</div>
+}
+
+export function LoginPage(props) {
+    const [getError, setError] = useState('');
     const classes = useStyles();
     
     let [email, password] = [];
 
     const loginClick = (event) => {
-        event.target.placeholder = "mail@mail.ru"
+        event.target.placeholder = "mail@mail.ru";
     }
     const loginChange = (event) => {
         email = event.target.value;
         setError("");
     }
     const passwordClick = (event) => {
-        event.target.placeholder = "******"
+        event.target.placeholder = "******";
     }
     const passwordChange = (event) => {
         password = event.target.value;
     }
     const buttonClick = (logIn, getIsLoggedIn) => {
-        logIn(email, password) ? props.pageChange('OrderPage') : setError("Не верно");
+        logIn(email, password) ? props.pageChange('OrderPage') : setError("Проверьте имя пользователя / пароль");
     }
     const linkClick = () => {
-        props.pageChange('RegistrationPage')
+        props.pageChange('RegistrationPage');
     }
 
     return (          
@@ -47,21 +51,19 @@ function LoginPage(props) {
             { ({logIn, logOut, getIsLoggedIn}) => 
                 <div className="wrapper form">
                     <Typography className={classes.header} variant="h5" gutterBottom ><b>Войти</b></Typography>
-                    <form className={classes.root} noValidate autoComplete="off">                                
-                        <TextField 
-                            className={classes.input} 
-                            id="standard-basic" 
-                            label="Имя пользователя *" 
-                            onClick={ loginClick } 
-                            onChange={ loginChange } 
-                            helperText={ getError }
-                        />
-                        <FormControl className={clsx(classes.margin, classes.textField, classes.input)}>
-                            <InputLabel htmlFor="standard-adornment-password">Пароль *</InputLabel>
-                            <Input id="standard-adornment-password" type='password' onClick={ passwordClick } onChange={ passwordChange } />
-                        </FormControl>
-                        <Button className={classes.button} variant="contained" onClick={ () => buttonClick(logIn, getIsLoggedIn) } >Войти</Button>
-                    </form>
+                    <TextField 
+                        className={classes.input} 
+                        id="standard-basic" 
+                        label="Имя пользователя *" 
+                        onClick={ loginClick } 
+                        onChange={ loginChange } 
+                    />
+                    <FormControl className={clsx(classes.margin, classes.textField, classes.input)}>
+                        <InputLabel htmlFor="standard-adornment-password">Пароль *</InputLabel>
+                        <Input id="standard-adornment-password" type='password' onClick={ passwordClick } onChange={ passwordChange } />
+                    </FormControl>
+                    <LoginError errorText={ getError }/>
+                    <Button className={classes.button} variant="contained" onClick={ () => buttonClick(logIn, getIsLoggedIn) } >Войти</Button>
                     <Typography className={classes.link}>Новый пользователь?  <Link href="#" onClick={ linkClick } >Зарегистрируйтесь</Link></Typography>
                 </div>
             } 
@@ -72,5 +74,6 @@ function LoginPage(props) {
 LoginPage.propTypes = {
     pageChange: propTypes.func.isRequired
 }
-
-export default LoginPage
+LoginError.protTypes = {
+    errorText: propTypes.text
+}

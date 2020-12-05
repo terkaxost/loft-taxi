@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 export class Map extends React.Component {
     map = null;
-    mapContainer = React.createRef();
+    mapContainer = createRef();
     
     componentDidMount() {
         mapboxgl.accessToken = 'pk.eyJ1IjoidGVya2F4b3N0IiwiYSI6ImNraTNoOHg5bjIwdzUydGx0MnU2em56aDEifQ.QBQQ1kqh2wLhSd2KAsBlgg';
