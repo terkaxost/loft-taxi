@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { FormStyles } from './FormStyles';
-import Header from './Header';
-import { myCards } from './OrderCards.js'
+import { Header}  from './Header';
+import { myCards, Card } from './OrderCards'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     cards: {
@@ -27,34 +26,15 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 330,
         textAlign: "left",
       },
-      selectEmpty: {
-        marginTop: theme.spacing(1),
-      },
     ...FormStyles
   }));
 
-function Card(props) {
-    return <Paper elevation={props.card.theme} 
-            onMouseEnter={ () => { props.cardTheme("enter", props.card.name) } } 
-            onMouseLeave={ () => { props.cardTheme("leave", props.card.name) } } 
-            onClick={ () => { props.cardTheme("click", props.card.name) } } 
-        >
-            <div style={{textAlign: "left", margin: "5px"}}>
-                <Typography variant="subtitle2" gutterBottom >{props.card.name}</Typography>
-                <Typography variant="caption" display="block" >Стоимость</Typography>
-                <Typography variant="h6" display="block" gutterBottom >{props.card.cost}</Typography>
-            </div>
-            <Typography >{props.card.img}</Typography>
-            
-        </Paper>
-}
-
-function OrderPage(props) {
+export function OrderPage(props) {
     const classes = useStyles();
     
     const [getCards, setCards] = useState( myCards );  
-    const [from, setFrom] = React.useState('');  
-    const [where, setWhere] = React.useState(''); 
+    const [from, setFrom] = useState('');  
+    const [where, setWhere] = useState(''); 
 
     const fromChange = (event) => {
         setFrom(event.target.value);
@@ -76,54 +56,53 @@ function OrderPage(props) {
     }
 
     return (
-        <>
-            <Header pageChange={props.pageChange}/>
-            <div className="wrapper form">
-                <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Откуда</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={from}
-                    onChange={fromChange}
-                    >
-                    <MenuItem value={1}>Адрес 1</MenuItem>
-                    <MenuItem value={2}>Адрес 2</MenuItem>
-                    <MenuItem value={3}>Адрес 3</MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Куда</InputLabel>
-                    <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={where}
-                    onChange={whereChange}
-                    >
-                    <MenuItem value={1}>Адрес 1</MenuItem>
-                    <MenuItem value={2}>Адрес 2</MenuItem>
-                    <MenuItem value={3}>Адрес 3</MenuItem>
-                    </Select>
-                </FormControl>
-                <div className={classes.cards}>
-                    {getCards.map( cardObj => (
-                        <Card cardTheme={ cardChangeTheme } card={ cardObj } key={ Math.random() } />
-                    ))}
-                </div>
-                <Button className={classes.button} variant="contained" >Заказать</Button>
+        <><Header pageChange={props.pageChange}/>
+        <div className="wrapper form">
+            <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Откуда</InputLabel>
+                <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={from}
+                onChange={fromChange}
+                >
+                <MenuItem value={1}>Адрес 1</MenuItem>
+                <MenuItem value={2}>Адрес 2</MenuItem>
+                <MenuItem value={3}>Адрес 3</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Куда</InputLabel>
+                <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={where}
+                onChange={whereChange}
+                >
+                <MenuItem value={1}>Адрес 1</MenuItem>
+                <MenuItem value={2}>Адрес 2</MenuItem>
+                <MenuItem value={3}>Адрес 3</MenuItem>
+                </Select>
+            </FormControl>
+            <div className={classes.cards}>
+                {getCards.map( cardObj => (
+                    <Card cardTheme={ cardChangeTheme } card={ cardObj } key={ Math.random() } />
+                ))}
             </div>
-
-            <div className="wrapper form">
-                <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
-                <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
-                <Button className={classes.button} variant="contained" >Сделать новый заказ</Button>
-            </div>
-        </>
+            <Link to="/order/confirm"><Button className={classes.button} variant="contained" >Заказать</Button></Link>
+        </div></>
     )
 }
 
-OrderPage.propTypes = {
-    pageChange: propTypes.func.isRequired
-}
+export function OrderConfirm(props) {
+    const classes = useStyles();
 
-export default OrderPage
+    return (
+        <><Header pageChange={props.pageChange}/>
+        <div className="wrapper form">
+            <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
+            <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
+            <Link to="/order"><Button className={classes.button} variant="contained" >Сделать новый заказ</Button></Link>
+        </div></>
+    )
+}

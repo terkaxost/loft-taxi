@@ -1,32 +1,27 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import './index.css';
-import LoginPage from './pgs/LoginPage';
+import { LoginPage } from './pgs/LoginPage';
 import RegistrationPage from './pgs/RegistrationPage';
-import ProfilePage from './pgs/ProfilePage';
-import OrderPage from './pgs/OrderPage';
+import { ProfilePage, ProfileConfirm } from './pgs/ProfilePage';
+import { OrderPage, OrderConfirm } from './pgs/OrderPage';
 import { Map } from './pgs/Map';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-export const Context = React.createContext();
+export const Context = createContext();
 
-export function AppAuth() {
-    const [getCurrentPageName, setCurrentPageName] = React.useState("LoginPage");
-    let [getIsLoggedIn, setIsLoggedIn] = React.useState(false);
+export function App() {
+    const [getIsLoggedIn, setIsLoggedIn] = useState(false);
+    const [getLoginErrorText, setLoginErrorText] = useState("");
     
-    const onPageChange = (name) => {
-        setCurrentPageName(name);
-    }
-    const pageComponents = {
-        LoginPage: <LoginPage pageChange={ onPageChange } />,
-        RegistrationPage: <RegistrationPage pageChange={ onPageChange } />,
-        ProfilePage: <ProfilePage pageChange={ onPageChange } />,
-        OrderPage: <OrderPage pageChange={ onPageChange } />
-    }
     const logIn = (email, password) => {
         if (email !== 'q' || password !== 'q') {
-            return false;
+            setIsLoggedIn(false);
+            setLoginErrorText("Проверьте имя пользователя / пароль");
+            return false
         }
         setIsLoggedIn(true);
-        return true;
+        setLoginErrorText("");
+        return true
     }
     const logOut = () => {
         setIsLoggedIn(false);
@@ -34,12 +29,18 @@ export function AppAuth() {
 
     return (
         <Context.Provider value={ {logIn, logOut, getIsLoggedIn} }>
-            <div style={ {zIndex: 1, position: "absolute"} }>
-                <Map />
-            </div>
-            <div style={ {zIndex: 2, position: "absolute"} }>
-                { pageComponents[getCurrentPageName] }
-            </div>
+            <Map />
+            <Switch>
+                <Route path="/login"><LoginPage errorText={getLoginErrorText}/></Route>
+                <Route path="/registration"><RegistrationPage /></Route>                
+                { getIsLoggedIn ? (<>
+                    <Route path="/order" exact><OrderPage /></Route>
+                    <Route path="/order/confirm" exact><OrderConfirm /></Route>
+                    <Route path="/profile" exact><ProfilePage /></Route>
+                    <Route path="/profile/confirm"><ProfileConfirm /></Route>
+                </>) : <Redirect to="/login" /> }
+                <Redirect to="/login" />
+            </Switch>
         </Context.Provider>
     )
 }

@@ -3,24 +3,11 @@ import { FormStyles } from './FormStyles'
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class RegistrationPage extends React.Component {
-    static propTypes = {
-        pageChange: PropTypes.func.isRequired,
-        classes: PropTypes.shape({
-            header: PropTypes.string,
-            input: PropTypes.string,
-        }) 
-    }
-    buttonClick(event) {
-        this.props.pageChange('ProfilePage')
-    }
-    linkClick(event) {
-        this.props.pageChange('LoginPage')
-    }
+    
     render () {
         return (     
             <div className="wrapper form">    
@@ -30,8 +17,8 @@ class RegistrationPage extends React.Component {
                     <TextField className={this.props.classes.inputHalf} id="standard-basic" label="Имя *" />
                     <TextField className={this.props.classes.inputHalf} id="standard-basic" label="Фамилия *" />
                     <TextField className={this.props.classes.input} id="standard-basic" label="Пароль *" />
-                    <Button className={this.props.classes.button} variant="contained" onClick={ (event) => this.buttonClick(event) }>Зарегистрироваться</Button>
-                    <Typography className={this.props.classes.link}>Уже зарегистрированы? <Link href="#" onClick={ (event) => this.linkClick(event) }>Войти</Link></Typography>
+                    <Link to="/profile"><Button className={this.props.classes.button} variant="contained" >Зарегистрироваться</Button></Link>
+                    <Typography className={this.props.classes.link}>Уже зарегистрированы? <Link to="/login" >Войти</Link></Typography>
                 </form>
             </div>
         )

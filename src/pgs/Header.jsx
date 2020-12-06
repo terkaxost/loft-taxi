@@ -5,8 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Logo } from 'loft-taxi-mui-theme';
-import propTypes from 'prop-types';
 import { Context } from '../App';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function Header(props) {
+export function Header(props) {
   const classes = useStyles();
 
   return (        
@@ -27,19 +27,12 @@ export default function Header(props) {
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
                     <Typography variant="h6" className={classes.title}><Logo /></Typography>
-                    <Button color="primary" onClick={ () => {props.pageChange('OrderPage')} }>Карта</Button>
-                    <Button color="primary" onClick={ () => {props.pageChange('ProfilePage')} }>Профиль</Button>
-                    <Button color="primary" onClick={ () => {
-                        props.pageChange('LoginPage');
-                        logOut();
-                    }} >Выйти</Button>
+                    <Link to="/order"><Button color="primary" >Карта</Button></Link>
+                    <Link to="/profile"><Button color="primary" >Профиль</Button></Link>
+                    <Button color="primary" onClick={ () => { logOut() } } >Выйти</Button>
                 </Toolbar>
             </AppBar>
         } 
       </Context.Consumer>
-  );
-}
-
-Header.propTypes = {
-    pageChange: propTypes.func.isRequired
+  )
 }

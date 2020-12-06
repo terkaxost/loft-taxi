@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { App, AppAuth } from './App';
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { theme } from 'loft-taxi-mui-theme';
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <MuiThemeProvider theme={ theme }>
-    <AppAuth />
-  </MuiThemeProvider>,
-  document.getElementById('root')
+        <MuiThemeProvider theme={ theme }>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </MuiThemeProvider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
