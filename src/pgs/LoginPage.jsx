@@ -3,16 +3,13 @@ import { FormStyles } from './FormStyles'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Route, Link, withRouter, Switch, Redirect } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import propTypes from 'prop-types';
 import { Context } from '../App';
-
-
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     ...FormStyles

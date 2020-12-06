@@ -5,10 +5,7 @@ import RegistrationPage from './pgs/RegistrationPage';
 import { ProfilePage, ProfileConfirm } from './pgs/ProfilePage';
 import { OrderPage, OrderConfirm } from './pgs/OrderPage';
 import { Map } from './pgs/Map';
-import { Route, Link, withRouter, Switch, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { logIn } from './actions';
-
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 export const Context = createContext();
 
@@ -44,32 +41,6 @@ export function App() {
                 </>) : <Redirect to="/login" /> }
                 <Redirect to="/login" />
             </Switch>
-            {/* for App.route, del before push */}
-            <div style={{position: "absolute" }}>
-                <Link to="/login" >LoginPage</Link>
-                <Link to="/registration" >RegistrationPage</Link>
-                <Link to="/order" >OrderPage</Link>
-                <Link to="/order/confirm" >OrderConfirm</Link>
-                <Link to="/profile" >ProfilePage</Link>
-                <Link to="/profile/confirm" >ProfileConfirm</Link>
-                <button onClick={ () => logIn("q", "q") }>LogIn</button>
-                <button onClick={ () => logOut() }>LogOut</button>
-            </div>
         </Context.Provider>
     )
-
-    // return (
-    //     <>
-    //         <Map />
-    //         { pageComponents[getCurrentPageName] }
-    //     </>
-    // )
 }
-
-// export const App = connect(
-//     (state) => {
-//         console.log(state)
-//         return ({someFromStore: state.auth.isLoggedIn})
-//     },
-//     { logIn }
-// )(AppWithoutStore);

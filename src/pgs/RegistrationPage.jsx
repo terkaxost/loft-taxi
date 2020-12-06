@@ -3,9 +3,8 @@ import { FormStyles } from './FormStyles'
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Route, Link, withRouter, Switch, Redirect } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class RegistrationPage extends React.Component {
     
