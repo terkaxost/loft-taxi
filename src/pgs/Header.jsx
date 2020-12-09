@@ -5,8 +5,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Logo } from 'loft-taxi-mui-theme';
-import { Context } from '../App';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AUTH_LOGOUT } from '../actions/auth';
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -18,21 +19,18 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export function Header(props) {
-  const classes = useStyles();
+export function Header() {
+    const dispatch = useDispatch();
+    const classes = useStyles();
 
-  return (        
-    <Context.Consumer> 
-        { ({logIn, logOut, getIsLoggedIn}) => 
-            <AppBar position="static">
-                <Toolbar className={classes.toolbar}>
-                    <Typography variant="h6" className={classes.title}><Logo /></Typography>
-                    <Link to="/order"><Button color="primary" >Карта</Button></Link>
-                    <Link to="/profile"><Button color="primary" >Профиль</Button></Link>
-                    <Button color="primary" onClick={ () => { logOut() } } >Выйти</Button>
-                </Toolbar>
-            </AppBar>
-        } 
-      </Context.Consumer>
-  )
+    return (        
+        <AppBar position="static">
+            <Toolbar className={classes.toolbar}>
+                <Typography variant="h6" className={classes.title}><Logo /></Typography>
+                <Link to="/order"><Button color="primary" >Карта</Button></Link>
+                <Link to="/profile"><Button color="primary" >Профиль</Button></Link>
+                <Button color="primary" onClick={ () => dispatch( {type: AUTH_LOGOUT} ) } >Выйти</Button>                
+            </Toolbar>
+        </AppBar>
+    )
 }

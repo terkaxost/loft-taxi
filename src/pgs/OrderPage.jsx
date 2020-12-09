@@ -30,11 +30,10 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export function OrderPage(props) {
-    const classes = useStyles();
-    
     const [getCards, setCards] = useState( myCards );  
     const [from, setFrom] = useState('');  
     const [where, setWhere] = useState(''); 
+    const classes = useStyles();
 
     const fromChange = (event) => {
         setFrom(event.target.value);
@@ -98,7 +97,7 @@ export function OrderConfirm(props) {
     const classes = useStyles();
 
     return (
-        <><Header pageChange={props.pageChange}/>
+        <><Header/>
         <div className="wrapper form">
             <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
             <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
