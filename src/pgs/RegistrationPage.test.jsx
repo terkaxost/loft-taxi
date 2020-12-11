@@ -1,53 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RegistrationPage from './RegistrationPage';
-import { fireEvent, render } from '@testing-library/react';
-// import { render } from 'react-testing-library';
-import { Context } from '../App';
-// import { act } from 'react-dom/test-utils';
+import { RegistrationPage } from './RegistrationPage';
+import { render } from '@testing-library/react';
 
-// describe("RegistrationPage", () => {
-//     it("renders without crashing", () => {
-//         const div = document.createElement("div");
-//         ReactDOM.render(<RegistrationPage pageChange={ () => null } />, div);
-//         ReactDOM.unmountComponentAtNode(div);
-//     });
-//     it("renders correctly", () => {
-//         const { container } = render(<RegistrationPage pageChange={ () => null } />);
-//         expect( container.innerHTML ).toMatch("Регистрация");
-//     });
-    // it("includes inputs with attributes", () => {
-    //     const { getByLabelText } = render(<RegistrationPage pageChange={ () => null } />)
-    //     expect(getByLabelText('Имя пользователя *').toHaveAttribute('name', 'login'))
-    //     expect(getByLabelText('Пароль *').toHaveAttribute('name', 'password'))  
-    // });
-    // it("has button which work with function from props", () => {
-    //     const { getByText, container } = render(<RegistrationPage pageChange={ () => null } />);
-    //     fireEvent.click( getByText("Зарегистрироваться") )
-    //     expect( container.innerHTML ).toMatch("Профиль")
-    // });
-// });
-
-// to move at App.test 
-describe("AuthContext", () => {
-    describe("#logIn", () => {
-        it("sets isLoggedIn to false", () => {
-            let isLoggedIn;
-            let logIn;
-
-            render(
-                <Context.Provider>
-                    <Context.Consumer>
-                        {(value) => {
-                            isLoggedIn = value.isLoggedIn;
-                            logIn = value.login;
-                            return null
-                        }}
-                    </Context.Consumer>
-                </Context.Provider>
-            )
-
-            expect(isLoggedIn).toBe(false)
-        });
+describe("RegistrationPage", () => {
+    it("renders without crashing", () => {
+        const div = document.createElement("div");
+        ReactDOM.render(<RegistrationPage pageChange={ () => null } />, div);
+        ReactDOM.unmountComponentAtNode(div);
+    });
+    it("has correct header ", () => {
+        const { container } = render(<RegistrationPage pageChange={ () => null } />);
+        expect( container.innerHTML ).toMatch("Регистрация");
+    });
+    it("can find link by test id", () => {
+        const { getByTestId } = render(<RegistrationPage pageChange={ () => null } />);
+        expect( getByTestId("link") ).not.toBeFalsy()
+    });
+    it("has link without path", () => {
+        const { getByTestId } = render(<RegistrationPage pageChange={ () => null } />);
+        expect( getByTestId("link") ).toHaveAttribute('href', '#');
+    });
+    it("has link with correct text", () => {
+        const { getByTestId } = render(<RegistrationPage pageChange={ () => null } />);
+        expect( getByTestId("link").textContent ).toBe("Авторизоваться");
+    });
+    it("has same link, which was finded by id and by text inside", () => {
+        const { getByTestId, getByText } = render(<RegistrationPage pageChange={ () => null } />);
+        expect( getByTestId("link") ).toBe( getByText("Авторизоваться") );
     });
 });

@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import './index.css';
 import { LoginPage } from './pgs/LoginPage';
-import RegistrationPage from './pgs/RegistrationPage';
+import { RegistrationPage } from './pgs/RegistrationPage';
 import { ProfilePage } from './pgs/ProfilePage';
 import { OrderPage } from './pgs/OrderPage';
 import { Map } from './pgs/Map';
@@ -40,7 +40,7 @@ export function App() {
             <Map />
             { pageComponents[getCurrentPageName] }
             
-            {/* for App.test, del before push */}
+            {/* for check navigation into App.test */}
             <div style={{position: "absolute" }}>
                 <button onClick={ () => onPageChange("LoginPage") }>LoginPage</button>
                 <button onClick={ () => onPageChange("RegistrationPage") }>RegistrationPage</button>

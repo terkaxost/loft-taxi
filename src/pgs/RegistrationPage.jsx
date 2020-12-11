@@ -7,7 +7,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
-class RegistrationPage extends React.Component {
+class RegistrationPageWithoutStyles extends React.Component {
     static propTypes = {
         pageChange: PropTypes.func.isRequired,
         classes: PropTypes.shape({
@@ -31,11 +31,13 @@ class RegistrationPage extends React.Component {
                     <TextField className={this.props.classes.inputHalf} id="standard-basic" label="Фамилия *" />
                     <TextField className={this.props.classes.input} id="standard-basic" label="Пароль *" />
                     <Button className={this.props.classes.button} variant="contained" onClick={ (event) => this.buttonClick(event) }>Зарегистрироваться</Button>
-                    <Typography className={this.props.classes.link}>Уже зарегистрированы? <Link href="#" onClick={ (event) => this.linkClick(event) }>Войти</Link></Typography>
+                    <Typography className={this.props.classes.link}>Уже зарегистрированы? <Link data-testid="link" href="#" onClick={ (event) => this.linkClick(event) }>Авторизоваться</Link></Typography>
                 </form>
             </div>
         )
     }
 }
 
-export default withStyles(FormStyles)(RegistrationPage)
+// export default withStyles(FormStyles)(RegistrationPageWithoutStyles)
+
+export const RegistrationPage = withStyles(FormStyles)(RegistrationPageWithoutStyles);
