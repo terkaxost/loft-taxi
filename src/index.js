@@ -10,7 +10,7 @@ import { store } from './redux/store'
 
 ReactDOM.render(
     <MuiThemeProvider theme={ theme }>
-        <Provider store={store}>            
+        <Provider store={store}>
             <App />
         </Provider>
     </MuiThemeProvider>,

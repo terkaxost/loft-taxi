@@ -1,21 +1,37 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import './index.css';
 import { LoginPage, LoginConfirm } from './pgs/LoginPage';
 import { RegistrationPage, RegistrationConfirm } from './pgs/RegistrationPage';
 import { ProfilePage, ProfileConfirm } from './pgs/ProfilePage';
 import { OrderPage, OrderConfirm } from './pgs/OrderPage';
 import { Map } from './pgs/Map';
-import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom'; 
+import { Route, Switch, Redirect, BrowserRouter, Link } from 'react-router-dom'; 
 import { useSelector } from 'react-redux';
 
-export const Context = createContext();
+export function InsideComponent() {
+    return (<>
+        <div>Some text in inside component</div>
+    </>)
+}
+export function OutsideComponent() {
+    return (<>
+        <div>Some text in outside component</div>
+        <InsideComponent />
+    </>)
+}
 
 export function App() {
     const isLoggedIn = useSelector( (state) => state.auth.isLoggedIn );
     const error = useSelector( (state) => state.auth.error );
 
-    return (
+    return (<>
         <BrowserRouter>
+            <div style={{position: "absolute"}}>
+                <Link to="/login">LoginPage</Link>
+                <Link to="/registration">RegistrationPage</Link>
+                <Link to="/order">OrderPage</Link>
+                <Link to="/profile">ProfilePage</Link>
+            </div>
             <Map />
             <Switch>
                 <Route path="/login" exact><LoginPage error={error} /></Route>
@@ -33,5 +49,5 @@ export function App() {
                 <Redirect to="/login" />
             </Switch>
         </BrowserRouter>
-    )
+    </>)
 }
