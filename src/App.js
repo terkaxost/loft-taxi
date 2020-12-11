@@ -25,13 +25,11 @@ export function App() {
         if (email !== 'q' || password !== 'q') {
             return false;
         }
-        console.log("logIn")
         setIsLoggedIn(true);
         
         return true;
     }
     const logOut = () => {
-        console.log("logOut")
         setIsLoggedIn(false);
     }
 
