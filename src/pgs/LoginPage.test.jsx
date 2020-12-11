@@ -1,15 +1,20 @@
-import React from 'react'
-import LoginPage from './LoginPage'
-import { render } from '@testing-library/react'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { LoginPage } from './LoginPage';
+import { render } from '@testing-library/react';
+import { Context } from '../App';
 
-describe ("LoginPage", () => {    
-    it("render correctly", () => {
-        const {container} = render(<LoginPage />)
-        expect(container.innerHTML).toMatch("Имя пользователя")
-    })
-    it("includes inputs with attributes", () => {
-        const { getByLabelText } = render(<LoginPage page={ {header: "Авторозация"} }/>)
-        expect(getByLabelText('Имя пользователя *').toHaveAttribute('name', 'login'))
-        expect(getByLabelText('Пароль *').toHaveAttribute('name', 'password'))  
-    })
-})
+describe ("LoginPage", () => {
+    const WrapperLoginPage = () => (
+        <Context.Provider value={ {logIn: null, logOut: null, getIsLoggedIn: false} }>
+            <Context.Consumer>    
+                { () => <LoginPage pageChange={ () => null } /> }
+            </Context.Consumer>
+        </Context.Provider>
+    )
+    it("renders without crashing", () => {
+        const div = document.createElement("div");
+        ReactDOM.render(<WrapperLoginPage />, div);
+        ReactDOM.unmountComponentAtNode(div);
+    });
+});

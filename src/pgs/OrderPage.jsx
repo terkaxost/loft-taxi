@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FormStyles } from './FormStyles';
 import Header from './Header';
+import { myCards } from './OrderCards.js'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     cards: {
@@ -31,27 +33,6 @@ const useStyles = makeStyles((theme) => ({
     ...FormStyles
   }));
 
-const myCards = [
-    {
-        name: "Стандарт",
-        cost: "150Р",
-        img: "IMG",
-        theme: 1
-    },
-    {
-        name: "Бизнес",
-        cost: "250Р",
-        img: "IMG",
-        theme: 1
-    }
-    ,{
-        name: "Премиум",
-        cost: "350Р",
-        img: "IMG",
-        theme: 1
-    }
-];
-
 function Card(props) {
     return <Paper elevation={props.card.theme} 
             onMouseEnter={ () => { props.cardTheme("enter", props.card.name) } } 
@@ -63,17 +44,16 @@ function Card(props) {
                 <Typography variant="caption" display="block" >Стоимость</Typography>
                 <Typography variant="h6" display="block" gutterBottom >{props.card.cost}</Typography>
             </div>
-            <Typography >{props.card.img}</Typography>
-            
+            <Typography >{props.card.img}</Typography>            
         </Paper>
 }
 
-function OrderPage(props) {
+export function OrderPage(props) {
     const classes = useStyles();
     
     const [getCards, setCards] = useState( myCards );  
-    const [from, setFrom] = React.useState('');  
-    const [where, setWhere] = React.useState(''); 
+    const [from, setFrom] = useState('');  
+    const [where, setWhere] = useState(''); 
 
     const fromChange = (event) => {
         setFrom(event.target.value);
@@ -131,14 +111,22 @@ function OrderPage(props) {
                 </div>
                 <Button className={classes.button} variant="contained" >Заказать</Button>
             </div>
-
-            <div className="wrapper form">
-                <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
-                <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
-                <Button className={classes.button} variant="contained" >Сделать новый заказ</Button>
-            </div>
         </>
     )
 }
 
-export default OrderPage
+export function OrderConfirm(props) {
+    const classes = useStyles();
+
+    return (
+        <div className="wrapper form">
+            <Typography className={classes.header} variant="h5" gutterBottom ><b>Заказ размещен</b></Typography>
+            <Typography >Ваше такси уже едет к вам. Прибудет приблизительно через 10 мин</Typography>
+            <Button className={classes.button} variant="contained" >Сделать новый заказ</Button>
+        </div>
+    )
+}
+
+OrderPage.propTypes = {
+    pageChange: propTypes.func.isRequired
+}

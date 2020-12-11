@@ -8,12 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import propTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     ...FormStyles
 }));
 
-function ProfilePage(props) {
+export function ProfilePage(props) {
     const classes = useStyles();
 
     const numberChange = (event) => {
@@ -48,14 +49,22 @@ function ProfilePage(props) {
                     <Button className={classes.button} variant="contained" >Сохранить</Button>
                 </div>
             </div>
-
-            <div className="wrapper form">
-                <Typography className={classes.header} variant="h5" gutterBottom ><b>Профиль</b></Typography>
-                <Typography >Платёжные данные обновлены. Теперь вы можете заказывать такси.</Typography>
-                <Button className={classes.button} variant="contained" >Перейти на карту</Button>
-            </div>
         </>
     )
 }
 
-export default ProfilePage
+export function ProfileConfirm(props) {
+    const classes = useStyles();
+    
+    return (
+        <div className="wrapper form">
+            <Typography className={classes.header} variant="h5" gutterBottom ><b>Профиль</b></Typography>
+            <Typography >Платёжные данные обновлены. Теперь вы можете заказывать такси.</Typography>
+            <Button className={classes.button} variant="contained" >Перейти на карту</Button>
+        </div>
+    )
+}
+
+ProfilePage.propTypes = {
+    pageChange: propTypes.func.isRequired
+}
